@@ -123,7 +123,7 @@ std::uint64_t Engine::perft(const std::string& fen, Depth depth, bool isChess960
 
 void Engine::go(Search::LimitsType& limits) {
     assert(limits.perft == 0);
-    verify_networks();
+    // verify_networks();
     limits.capSq = capSq;
 
     threads.start_thinking(options, pos, states, limits);
