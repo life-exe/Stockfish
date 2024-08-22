@@ -40,7 +40,11 @@ class UCIEngine {
    public:
     UCIEngine(int argc, char** argv);
 
-    void loop();
+    void        loop();
+    std::string sendCommand(const std::string& cmd);
+    void        position(std::istringstream& is);
+    void        go(std::istringstream& is);
+    void set_bestmove_callback(std::function<void(std::string_view, std::string_view)> callback);
 
     static int         to_cp(Value v, const Position& pos);
     static std::string format_score(const Score& s);
@@ -53,6 +57,7 @@ class UCIEngine {
     static Search::LimitsType parse_limits(std::istream& is);
 
     auto& engine_options() { return engine.get_options(); }
+    void  setoption(std::istringstream& is);
 
    private:
     Engine      engine;
@@ -60,10 +65,9 @@ class UCIEngine {
 
     static void print_info_string(const std::string& str);
 
-    void          go(std::istringstream& is);
-    void          bench(std::istream& args);
-    void          position(std::istringstream& is);
-    void          setoption(std::istringstream& is);
+
+    void bench(std::istream& args);
+
     std::uint64_t perft(const Search::LimitsType&);
 
     static void on_update_no_moves(const Engine::InfoShort& info);

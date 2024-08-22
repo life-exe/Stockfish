@@ -167,6 +167,23 @@ void UCIEngine::loop() {
     } while (token != "quit" && cli.argc == 1);  // The command-line arguments are one-shot
 }
 
+std::string UCIEngine::sendCommand(const std::string& cmd) {
+    if (cmd == "compiler")
+    {
+        return compiler_info();
+    }
+    else if (cmd == "ucinewgame")
+    {
+        engine.search_clear();
+    }
+    return std::string{};
+}
+
+void UCIEngine::set_bestmove_callback(
+  std::function<void(std::string_view, std::string_view)> callback) {
+    engine.set_on_bestmove([callback](const auto& bm, const auto& p) { callback(bm, p); });
+}
+
 Search::LimitsType UCIEngine::parse_limits(std::istream& is) {
     Search::LimitsType limits;
     std::string        token;
