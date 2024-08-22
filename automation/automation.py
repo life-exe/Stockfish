@@ -28,7 +28,7 @@ class Config:
     CMAKE_GENERATOR = "Visual Studio 17 2022" # https://cmake.org/cmake/help/latest/manual/cmake-generators.7.html
     PLATFORM = Platform.X64  # Platform.WIN32
     FRESH = True
-    CLEAN = True
+    CLEAN = False
     VERBOSE = False
     SOURCE_DIR = "Source"
     BUILD_LIB = False
